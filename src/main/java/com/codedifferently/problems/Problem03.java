@@ -1,5 +1,10 @@
 package com.codedifferently.problems;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Problem03 {
     /**
      * You will be given an integer called number and an array called possibleFamilyMembers
@@ -18,6 +23,18 @@ public class Problem03 {
      * @return
      */
     public Integer[] numberFamily(Integer number, Integer[] possibleFamilyMembers){
-        return null;
+        ArrayList<Integer> familyMembers = new ArrayList<>();
+        for(int member : possibleFamilyMembers){
+            int difference = Math.abs(number - member);
+            if(difference < 1)
+                familyMembers.add(member);
+        }
+
+        Integer[] result = new Integer[familyMembers.size()];
+        for(int i = 0; i<familyMembers.size(); i++){
+            result[i] = familyMembers.get(i);
+        }
+        Arrays.sort(result);
+        return result;
     }
 }
