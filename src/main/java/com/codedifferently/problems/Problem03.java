@@ -23,18 +23,39 @@ public class Problem03 {
      * @return
      */
     public Integer[] numberFamily(Integer number, Integer[] possibleFamilyMembers){
-        ArrayList<Integer> familyMembers = new ArrayList<>();
-        for(int member : possibleFamilyMembers){
-            int difference = Math.abs(number - member);
-            if(difference < 1)
-                familyMembers.add(member);
+//        ArrayList<Integer> familyMembers = new ArrayList<>();
+//        Arrays.sort(possibleFamilyMembers);
+//        for(int member : possibleFamilyMembers){
+//            int difference = Math.abs(number - member);
+//            if(difference < 2)
+//                familyMembers.add(member);
+//        }
+//
+//        Integer[] result = new Integer[familyMembers.size()];
+//        for(int i = 0; i<familyMembers.size(); i++){
+//            result[i] = familyMembers.get(i);
+//        }
+//        Arrays.sort(result);
+//        return result;
+        List<Integer> familyMembers = new ArrayList<>();
+        Arrays.sort(possibleFamilyMembers);
+        List<Integer> nums = new ArrayList<>(Arrays.asList(possibleFamilyMembers));
+        int start = nums.indexOf(number);
+        for (int i = start - 1; i < possibleFamilyMembers.length - 1; i++) {
+            if (Math.abs(possibleFamilyMembers[i] - possibleFamilyMembers[i + 1]) <= 1) {
+                familyMembers.add(possibleFamilyMembers[i + 1]);
+            }
         }
-
-        Integer[] result = new Integer[familyMembers.size()];
-        for(int i = 0; i<familyMembers.size(); i++){
-            result[i] = familyMembers.get(i);
+        for (int i = start; i > 0; i--) {
+            if (Math.abs(possibleFamilyMembers[i] - possibleFamilyMembers[i - 1]) <= 1) {
+                familyMembers.add(possibleFamilyMembers[i - 1]);
+                continue;
+            }
+            break;
         }
-        Arrays.sort(result);
-        return result;
+        Integer[] array = new Integer[familyMembers.size()];
+        array = familyMembers.toArray(array);
+        Arrays.sort(array);
+        return array;
     }
 }

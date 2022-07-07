@@ -10,17 +10,15 @@ public class Problem01 {
      * @return
      */
     public Integer countDuplicateLetters(String input, String letter){
-        HashMap<Character, Integer> countLetters = new HashMap<>();
-        char[] letters = input.toCharArray();
-        for(char c : letters){
-            if(Character.toLowerCase(c) == letter.charAt(0)){
-                if(countLetters.containsKey(Character.toLowerCase(c)))
-                    countLetters.put(c, countLetters.get(c) + 1);
-                else
-                    countLetters.put(Character.toLowerCase(c), 1);
-            }
-
-        }
-        return countLetters.get(letter.charAt(0));
+//        int letterCount = 0;
+//        char[] letters = input.toCharArray();
+//        for(int i = 0; i<input.length(); i++){
+//            char lowerCase = Character.toLowerCase(letters[i]);
+//            if(lowerCase == Character.toLowerCase(letter.charAt(0))){
+//                letterCount++;
+//            }
+//        }
+        String regex = "[^"+letter.toLowerCase()+"]";
+        return input.toLowerCase().replaceAll(regex, "").length();
     }
 }
